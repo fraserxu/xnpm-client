@@ -1,0 +1,40 @@
+{
+  "name": "xnpm-client",
+  "private": true,
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fraserxu/xnpm-client.git"
+  },
+  "homepage": "https://github.com/fraserxu/xnpm-client",
+  "author": {
+    "name": "Fraser Xu",
+    "email": "xvfeng123@gmail.com",
+    "url": "http://xvfeng.me"
+  },
+  "dependencies": {
+    "JSONStream": "^0.8.4",
+    "director": "~1.2.2",
+    "event-stream": "^3.1.5",
+    "hyperquest": "^0.3.0",
+    "node-bourbon": "1.0.0",
+    "react": "~0.8.0",
+    "shoe": "0.0.15",
+    "superagent": "^0.18.2"
+  },
+  "devDependencies": {
+    "gulp-util": "~2.2.12",
+    "gulp": "~3.5.6",
+    "gulp-browserify": "0.3.4",
+    "gulp-if": "0.0.3",
+    "gulp-sass": "~0.4.0",
+    "gulp-uglify": "~0.1.0",
+    "reactify": "~0.5.1",
+    "tiny-lr": "0.0.5",
+    "express": "~3.4.7",
+    "gulp-watch": "~0.5.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}
