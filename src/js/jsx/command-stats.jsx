@@ -11,7 +11,12 @@ module.exports = React.createClass({
   componentWillMount: function() {
     superagent.get('/stats')
       .end(function(res) {
-        this.setState({data: res.body})
+        var data = {
+          remainingPercent: (res.body.remaining / res.body.cap * 100).toFixed(2),
+          remainingMb: (res.body.remaining / 1024 / 1024).toFixed(2),
+          cap: res.body.cap /1024 / 1024
+        }
+        this.setState({data: data})
       }.bind(this))
   },
   render: function() {
