@@ -20,7 +20,9 @@
     "node-bourbon": "1.0.0",
     "react": "~0.8.0",
     "shoe": "0.0.15",
-    "superagent": "^0.18.2"
+    "superagent": "^0.18.2",
+    "through2": "^0.5.1",
+    "through2-map": "^1.4.0"
   },
   "devDependencies": {
     "gulp-util": "~2.2.12",
