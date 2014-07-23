@@ -17,7 +17,7 @@ module.exports = React.createClass({
     return (
       <div className="commandBox">
         <h1>NPM command history</h1>
-        <CommandStats data={this.state.data} />
+        <CommandStats/>
         <CommandList data={this.state.data} />
       </div>
     );

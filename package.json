@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "JSONStream": "^0.8.4",
+    "d3": "^3.4.11",
     "director": "~1.2.2",
     "event-stream": "^3.1.5",
     "hyperquest": "^0.3.0",
+    "lodash": "^2.4.1",
     "node-bourbon": "1.0.0",
     "react": "~0.8.0",
     "shoe": "0.0.15",
