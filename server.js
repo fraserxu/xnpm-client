@@ -37,5 +37,6 @@ var sock = shoe(function (stream) {
   readData(stream);
 });
 
-sock.install(app.listen(9000), '/api');
+var port = Number(process.env.PORT || 5000);
+sock.install(app.listen(port), '/api');
 
