@@ -12,6 +12,9 @@
     "email": "xvfeng123@gmail.com",
     "url": "http://xvfeng.me"
   },
+  "script": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "JSONStream": "^0.8.4",
     "d3": "^3.4.11",

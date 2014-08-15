@@ -6,7 +6,7 @@ var browserify = require('gulp-browserify');
 var uglify = require('gulp-uglify');
 var gulpif = require('gulp-if');
 var sass = require('gulp-sass');
-var server = require('./server');
+var server = require('./server.js');
 var bourbon = require('node-bourbon').includePaths;
 var watch = require('gulp-watch');
 
@@ -17,23 +17,15 @@ gulp.task('scripts', function() {
     .pipe(browserify({
       insertGlobals : false,
       transform: ['reactify'],
-      extensions: ['.jsx'],
-      debug: !gulp.env.production
+      extensions: ['.jsx']
     }))
-    .pipe(gulpif(gulp.env.production, uglify({
-      mangle: {
-        except: ['require', 'export', '$super']
-      }
-    })))
     .pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('styles', function () {
   return gulp.src('./src/scss/main.scss')
     .pipe(sass({
-      outputStyle: gulp.env.production ? 'compressed' : 'expanded',
-      includePaths: ['./src/scss'].concat(bourbon),
-      errLogToConsole: gulp.env.watch
+      includePaths: ['./src/scss'].concat(bourbon)
     }))
     .pipe(gulp.dest('./dist/css'));
 });
