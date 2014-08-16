@@ -7,14 +7,6 @@ var Route = require('react-router/Route');
 var Link = require('react-router/Link');
 var CommandBox = require('./jsx/box');
 var BarChartBox = require('./jsx/barchart-box');
-var shoe = require('shoe');
-var stream = shoe('/api');
-
-// data
-var _data = []
-stream.on('data', function (data) {
-  _data.push(JSON.parse(data));
-});
 
 var App = React.createClass({
   render: function() {
