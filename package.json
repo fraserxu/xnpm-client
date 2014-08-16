@@ -18,28 +18,23 @@
   "dependencies": {
     "JSONStream": "^0.8.4",
     "d3": "^3.4.11",
-    "director": "~1.2.2",
     "event-stream": "^3.1.5",
+    "express": "~3.4.7",
     "hyperquest": "^0.3.0",
     "lodash": "^2.4.1",
     "node-bourbon": "1.0.0",
-    "react": "~0.8.0",
+    "react": "^0.11.1",
+    "react-router": "^0.5.2",
     "shoe": "0.0.15",
     "superagent": "^0.18.2",
     "through2": "^0.5.1",
-    "through2-map": "^1.4.0",
-    "express": "~3.4.7"
+    "through2-map": "^1.4.0"
   },
   "devDependencies": {
-    "gulp-util": "~2.2.12",
     "gulp": "~3.5.6",
     "gulp-browserify": "0.3.4",
-    "gulp-if": "0.0.3",
     "gulp-sass": "~0.4.0",
-    "gulp-uglify": "~0.1.0",
     "reactify": "~0.5.1",
-    "tiny-lr": "0.0.5",
-    "gulp-watch": "~0.5.0"
   },
   "engines": {
     "node": ">=0.10.0"
