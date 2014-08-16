@@ -23,4 +23,8 @@ gulp.task('styles', function () {
     .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('build', ['styles', 'scripts']);
+gulp.task('watch', function() {
+  gulp.watch('src/**/*.*', ['default']);
+});
+
+gulp.task('default', ['styles', 'scripts']);
