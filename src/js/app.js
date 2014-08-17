@@ -8,6 +8,9 @@ var Link = require('react-router/Link');
 var CommandBox = require('./jsx/box');
 var BarChartBox = require('./jsx/barchart-box');
 
+var shoe = require('shoe');
+var stream = shoe('/api');
+
 var App = React.createClass({
   render: function() {
     return (

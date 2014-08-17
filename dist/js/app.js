@@ -45474,6 +45474,9 @@ var Link = require('react-router/Link');
 var CommandBox = require('./jsx/box');
 var BarChartBox = require('./jsx/barchart-box');
 
+var shoe = require('shoe');
+var stream = shoe('/api');
+
 var App = React.createClass({displayName: 'App',
   render: function() {
     return (
@@ -45502,7 +45505,7 @@ var routes = (
 );
 
 React.renderComponent(routes, document.body);
-},{"./jsx/barchart-box":217,"./jsx/box":219,"react":209,"react-router/Link":22,"react-router/Route":23,"react-router/Routes":24}],216:[function(require,module,exports){
+},{"./jsx/barchart-box":217,"./jsx/box":219,"react":209,"react-router/Link":22,"react-router/Route":23,"react-router/Routes":24,"shoe":210}],216:[function(require,module,exports){
 /** @jsx React.DOM */
 'use strict';
 
@@ -45533,14 +45536,9 @@ var React = require('react');
 var BarChart = require('./barchart');
 
 module.exports = React.createClass({displayName: 'exports',
-  getInitialState: function() {
-    return {
-      data: []
-    };
-  },
   render: function() {
     return (
-      BarChart({width: 600, height: 300, data: this.state.data})
+      BarChart({width: 600, height: 300})
     );
   }
 });
@@ -45554,34 +45552,16 @@ var Chart = require('./chart');
 var DataSeries = require('./dataseries');
 var _ = require('lodash');
 
-var shoe = require('shoe');
-var stream = shoe('/api');
-
-// data
-var _data = [];
-stream.on('data', function (data) {
-  _data.push(JSON.parse(data));
-});
-
 module.exports = React.createClass({displayName: 'exports',
-  getInitialState: function() {
-    return {data: _data};
-  },
   render: function() {
-    var dates = this.state.data.map(function(data) {
-      var date = new Date(data.timestamp)
-      return date.getDate()
-    })
-    dates = _.values(_.countBy(dates, function(date) {return date}))
-
     return (
       Chart({width: this.props.width, height: this.props.height}, 
-        DataSeries({data: dates, width: this.props.width, height: this.props.height, color: "cornflowerblue"})
+        DataSeries({width: this.props.width, height: this.props.height, color: "cornflowerblue"})
       )
     );
   }
 });
-},{"./chart":220,"./dataseries":221,"lodash":21,"react":209,"shoe":210}],219:[function(require,module,exports){
+},{"./chart":220,"./dataseries":221,"lodash":21,"react":209}],219:[function(require,module,exports){
 /** @jsx React.DOM */
 'use strict';
 
@@ -45589,31 +45569,19 @@ var React = require('react');
 var CommandList = require('./list');
 var CommandStats = require('./stats');
 
-var shoe = require('shoe');
-var stream = shoe('/api');
-
-// data
-var _data = [];
-stream.on('data', function (data) {
-  _data.push(JSON.parse(data));
-});
-
 module.exports = React.createClass({displayName: 'exports',
-  getInitialState: function() {
-    return {data: _data};
-  },
   render: function() {
     return (
       React.DOM.div({className: "commandBox"}, 
         React.DOM.h1(null, "NPM command history"), 
         CommandStats(null), 
-        CommandList({data: this.state.data})
+        CommandList(null)
       )
     );
   }
 });
 
-},{"./list":222,"./stats":223,"react":209,"shoe":210}],220:[function(require,module,exports){
+},{"./list":222,"./stats":223,"react":209}],220:[function(require,module,exports){
 /** @jsx React.DOM */
 'use strict';
 
@@ -45634,27 +45602,36 @@ var React = require('react');
 var d3 = require('d3');
 var _ = require('lodash');
 var Bar = require('./bar');
+var shoe = require('shoe');
+var stream = shoe('/api');
 
 module.exports = React.createClass({displayName: 'exports',
-  getDefaultProps: function() {
-    return {
-      title: '',
-      data: []
-    }
+  getInitialState: function() {
+    return {items: []};
   },
-
+  componentWillMount: function() {
+    stream.on('data', function (item) {
+      this.state.items.push(JSON.parse(item));
+      this.setState({items: this.state.items});
+    }.bind(this));
+  },
   render: function() {
+    var dates = this.state.items.map(function(data) {
+      return new Date(data.timestamp).getDate()
+    })
+    dates = _.values(_.countBy(dates, function(date) {return date}));
+
     var props = this.props;
 
     var xScale = d3.scale.linear()
-      .domain([0, d3.max(this.props.data)])
-      .range([0, this.props.height]);
+      .domain([0, d3.max(dates)])
+      .range([0, props.height]);
 
     var yScale = d3.scale.ordinal()
-      .domain(d3.range(this.props.data.length))
+      .domain(d3.range(dates.length))
       .rangeRoundBands([0, this.props.height], 0.05);
 
-    var bars = _.map(this.props.data, function(point, i) {
+    var bars = _.map(dates, function(point, i) {
       return (
         Bar({width: xScale(point), height: yScale.rangeBand(), offset: yScale(i), availableWidth: props.width, color: props.color, key: i})
       )
@@ -45665,15 +45642,26 @@ module.exports = React.createClass({displayName: 'exports',
     );
   }
 });
-},{"./bar":216,"d3":1,"lodash":21,"react":209}],222:[function(require,module,exports){
+},{"./bar":216,"d3":1,"lodash":21,"react":209,"shoe":210}],222:[function(require,module,exports){
 /** @jsx React.DOM */
 'use strict';
 
 var React = require('react');
+var shoe = require('shoe');
+var stream = shoe('/api');
 
 module.exports = React.createClass({displayName: 'exports',
+  getInitialState: function() {
+    return {items: []};
+  },
+  componentWillMount: function() {
+    stream.on('data', function (item) {
+      this.state.items.push(JSON.parse(item));
+      this.setState({items: this.state.items});
+    }.bind(this));
+  },
   render: function() {
-    var commandNodes = this.props.data.map(function (data, i) {
+    var commandNodes = this.state.items.map(function (data, i) {
       return React.DOM.tr({key: i}, React.DOM.td(null, data.command), React.DOM.td(null, data.timestamp));
     });
     return (
@@ -45688,7 +45676,7 @@ module.exports = React.createClass({displayName: 'exports',
     );
   }
 });
-},{"react":209}],223:[function(require,module,exports){
+},{"react":209,"shoe":210}],223:[function(require,module,exports){
 /** @jsx React.DOM */
 'use strict';
 
