@@ -7,6 +7,7 @@ var Route = require('react-router/Route');
 var Link = require('react-router/Link');
 var CommandBox = require('./jsx/box');
 var BarChartBox = require('./jsx/barchart-box');
+var HeatMap = require('./jsx/heatmap');
 
 var shoe = require('shoe');
 var stream = shoe('/api');
@@ -32,6 +33,7 @@ var App = React.createClass({
 var routes = (
   <Routes location='history'>
     <Route name="app" path="/" handler={App}>
+      <Route name='heatmap' path='/heatmap' handler={HeatMap} />
       <Route name='commandbox' path='/command' handler={CommandBox} />
       <Route name='barchartbox' path='/barchart' handler={BarChartBox} />
     </Route>
