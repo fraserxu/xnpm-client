@@ -2,6 +2,7 @@
 'use strict';
 
 var React = require('react');
+var d3 = require('d3');
 var CalHeatMap = require('cal-heatmap');
 
 module.exports = React.createClass({

@@ -45307,6 +45307,7 @@ var App = React.createClass({displayName: 'App',
         React.DOM.header(null, 
           React.DOM.ul(null, 
             React.DOM.li(null, Link({to: "app"}, "Dashboard")), 
+            React.DOM.li(null, Link({to: "heatmap"}, "Heat Map")), 
             React.DOM.li(null, Link({to: "commandbox"}, "Command Table")), 
             React.DOM.li(null, Link({to: "barchartbox"}, "Bar Chart"))
           )
@@ -45459,6 +45460,7 @@ module.exports = React.createClass({displayName: 'exports',
 'use strict';
 
 var React = require('react');
+var d3 = require('d3');
 var CalHeatMap = require('cal-heatmap');
 
 module.exports = React.createClass({displayName: 'exports',
@@ -45472,7 +45474,7 @@ module.exports = React.createClass({displayName: 'exports',
   }
 });
 
-},{"cal-heatmap":1,"react":202}],216:[function(require,module,exports){
+},{"cal-heatmap":1,"d3":2,"react":202}],216:[function(require,module,exports){
 /** @jsx React.DOM */
 'use strict';
 

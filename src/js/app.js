@@ -24,6 +24,7 @@ var App = React.createClass({
         <header>
           <ul>
             <li><Link to="app">Dashboard</Link></li>
+            <li><Link to="heatmap">Heat Map</Link></li>
             <li><Link to="commandbox">Command Table</Link></li>
             <li><Link to="barchartbox">Bar Chart</Link></li>
           </ul>
