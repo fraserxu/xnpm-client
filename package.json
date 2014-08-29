@@ -25,7 +25,7 @@
     "lodash": "^2.4.1",
     "node-bourbon": "1.0.0",
     "react": "^0.11.1",
-    "react-router": "^0.5.2",
+    "react-router": "^0.5.3",
     "shoe": "0.0.15",
     "superagent": "^0.18.2",
     "through2": "^0.5.1",

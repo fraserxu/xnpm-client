@@ -7,7 +7,7 @@ var BarChart = require('./barchart');
 module.exports = React.createClass({
   render: function() {
     return (
-      <BarChart width={600} height={300} />
+      <BarChart width={600} height={300} data={this.props.data} />
     );
   }
 });

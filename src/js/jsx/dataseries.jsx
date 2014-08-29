@@ -5,21 +5,10 @@ var React = require('react');
 var d3 = require('d3');
 var _ = require('lodash');
 var Bar = require('./bar');
-var shoe = require('shoe');
-var stream = shoe('/api');
 
 module.exports = React.createClass({
-  getInitialState: function() {
-    return {items: []};
-  },
-  componentWillMount: function() {
-    stream.on('data', function (item) {
-      this.state.items.push(JSON.parse(item));
-      this.setState({items: this.state.items});
-    }.bind(this));
-  },
   render: function() {
-    var dates = this.state.items.map(function(data) {
+    var dates = this.props.data.map(function(data) {
       return new Date(data.timestamp).getDate()
     })
     dates = _.values(_.countBy(dates, function(date) {return date}));

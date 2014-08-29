@@ -12,6 +12,11 @@ var HeatMap = require('./jsx/heatmap');
 var shoe = require('shoe');
 var stream = shoe('/api');
 
+var items = []
+stream.on('data', function (item) {
+  items.push(JSON.parse(item));
+})
+
 var App = React.createClass({
   render: function() {
     return (
@@ -34,8 +39,8 @@ var routes = (
   <Routes location='history'>
     <Route name="app" path="/" handler={App}>
       <Route name='heatmap' path='/heatmap' handler={HeatMap} />
-      <Route name='commandbox' path='/command' handler={CommandBox} />
-      <Route name='barchartbox' path='/barchart' handler={BarChartBox} />
+      <Route name='commandbox' path='/command' data={items} handler={CommandBox} />
+      <Route name='barchartbox' path='/barchart' data={items} handler={BarChartBox} />
     </Route>
   </Routes>
 );
