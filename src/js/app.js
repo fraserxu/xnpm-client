@@ -26,13 +26,19 @@ var App = React.createClass({
     return (
       <div>
         <header>
-          <ul>
-            <li><Link to="app">Dashboard</Link></li>
-            <li><Link to="heatmap">Heat Map</Link></li>
-            <li><Link to="commandbox">Command Table</Link></li>
-            <li><Link to="barchartbox">Bar Chart</Link></li>
-            <li><Link to="chartist">Chartist Example</Link></li>
-          </ul>
+          <div class='header'>
+            <h1>NPM command history</h1>
+          </div>
+
+          <nav>
+            <ul>
+              <li><Link to="app">Dashboard</Link></li>
+              <li><Link to="heatmap">Heat Map</Link></li>
+              <li><Link to="commandbox">Command Table</Link></li>
+              <li><Link to="barchartbox">Bar Chart</Link></li>
+              <li><Link to="chartist">Chartist Example</Link></li>
+            </ul>
+          </nav>
         </header>
 
         <this.props.activeRouteHandler />

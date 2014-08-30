@@ -3,7 +3,6 @@
 
 var React = require('react');
 var _ = require('lodash');
-window._ = _
 var Chartist = require('chartist');
 
 module.exports = React.createClass({
@@ -12,8 +11,11 @@ module.exports = React.createClass({
       return new Date(data.timestamp).getDate()
     })
 
-    var labels = _.uniq(dates)
-    var times = _.values(_.countBy(dates, function(date) {return date}));
+    var labels = (_.uniq(this.props.data.map(function(data) {
+      return parseInt(new Date(data.timestamp).getUTCMonth() + 1) + '.' + new Date(data.timestamp).getUTCDate()
+    }))).reverse()
+
+    var times = (_.values(_.countBy(dates, function(date) {return date}))).reverse()
 
     // Our labels and three data series
     var data = {
@@ -42,13 +44,31 @@ module.exports = React.createClass({
         // used for the labels on each axis. Here we are converting the
         // values into million pound.
         labelInterpolationFnc: function(value) {
-          return parseInt(value) + 'times';
+          return parseInt(value);
         }
       }
     };
 
+    var responsiveOptions = [
+      ['screen and (min-width: 641px) and (max-width: 1024px)', {
+        showPoint: false,
+        axisX: {
+          labelInterpolationFnc: function(value) {
+            return 'Week ' + value;
+          }
+        }
+      }],
+      ['screen and (max-width: 640px)', {
+        showLine: false,
+        axisX: {
+          labelInterpolationFnc: function(value) {
+            return 'W' + value;
+          }
+        }
+      }]
+    ];
 
-    Chartist.Line('.ct-chart', data, options);
+    Chartist.Line('.ct-chart', data, options, responsiveOptions);
   },
   render: function() {
     return (

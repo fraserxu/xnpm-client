@@ -3,9 +3,46 @@ body {
   font-size: 16px;
   line-height: 1.42857;
   color: #222222;
-  background-color: white; }
-  body h1 {
-    text-align: center; }
+  background-color: white;
+  margin: 0px; }
+  body header {
+    border-bottom: 1px solid #999999;
+    padding-bottom: 14px;
+    background-color: white;
+    background: -webkit-linear-gradient(top, #ffffff, #f0f0f0); }
+    body header h1 {
+      padding: 4px 8px;
+      font-size: 24px;
+      color: #555555;
+      font-weight: 300; }
+    body header nav ul {
+      padding: 0px;
+      margin-left: 8px;
+      color: #333333;
+      font-weight: 300; }
+      body header nav ul li {
+        font-size: 14px;
+        padding: 4px;
+        display: inline;
+        border-top: 1px #cccccc solid;
+        border-left: 1px #cccccc solid;
+        border-bottom: 1px #cccccc solid; }
+        body header nav ul li:first-child {
+          border-bottom-left-radius: 3px;
+          border-top-left-radius: 3px; }
+        body header nav ul li:last-child {
+          border-right: 1px #cccccc solid;
+          border-bottom-right-radius: 3px;
+          border-top-right-radius: 3px; }
+        body header nav ul li:hover {
+          background-color: #cccccc; }
+        body header nav ul li a {
+          text-decoration: none; }
+  body .stats {
+    color: #555555;
+    font-size: 14px;
+    margin: 6px;
+    padding-left: 15px; }
   body .pull-right {
     text-align: right; }
 
