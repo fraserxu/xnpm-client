@@ -2,13 +2,17 @@
 'use strict';
 
 var React = require('react');
+var CommandBox = require('./table/box');
+var BarChartBox = require('./barchart/barchart-box');
+var HeatMap = require('./heatmap/heatmap');
+var Chartist = require('./chartist/chartist');
+
+// Router
 var Routes = require('react-router/Routes');
 var Route = require('react-router/Route');
 var Link = require('react-router/Link');
-var CommandBox = require('./jsx/box');
-var BarChartBox = require('./jsx/barchart-box');
-var HeatMap = require('./jsx/heatmap');
 
+// Stream
 var shoe = require('shoe');
 var stream = shoe('/api');
 
@@ -27,6 +31,7 @@ var App = React.createClass({
             <li><Link to="heatmap">Heat Map</Link></li>
             <li><Link to="commandbox">Command Table</Link></li>
             <li><Link to="barchartbox">Bar Chart</Link></li>
+            <li><Link to="chartist">Chartist Example</Link></li>
           </ul>
         </header>
 
@@ -40,6 +45,7 @@ var routes = (
   <Routes location='history'>
     <Route name="app" path="/" handler={App}>
       <Route name='heatmap' path='/heatmap' handler={HeatMap} />
+      <Route name='chartist' path='/chartist' handler={Chartist} />
       <Route name='commandbox' path='/command' data={items} handler={CommandBox} />
       <Route name='barchartbox' path='/barchart' data={items} handler={BarChartBox} />
     </Route>
