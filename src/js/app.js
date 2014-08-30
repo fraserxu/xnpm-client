@@ -22,17 +22,24 @@ stream.on('data', function (item) {
 })
 
 var App = React.createClass({
+  getInitialState: function() {
+    stream.on('data', this.mountData)
+    return { items: [] };
+  },
+  mountData: function(item) {
+    this.state.items.push(JSON.parse(item))
+    this.setState({ items: this.state.items })
+  },
   render: function() {
     return (
       <div>
         <header>
-          <div class='header'>
+          <div className='header'>
             <h1>NPM command history</h1>
           </div>
 
           <nav>
             <ul>
-              <li><Link to="app">Dashboard</Link></li>
               <li><Link to="heatmap">Heat Map</Link></li>
               <li><Link to="commandbox">Command Table</Link></li>
               <li><Link to="barchartbox">Bar Chart</Link></li>
@@ -48,7 +55,7 @@ var App = React.createClass({
 });
 
 var routes = (
-  <Routes location='history'>
+  <Routes>
     <Route name="app" path="/" handler={App}>
       <Route name='heatmap' path='/heatmap' handler={HeatMap} />
       <Route name='chartist' path='/chartist' data={items} handler={Chartist} />

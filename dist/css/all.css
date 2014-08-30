@@ -22,22 +22,24 @@ body {
       font-weight: 300; }
       body header nav ul li {
         font-size: 14px;
-        padding: 4px;
-        display: inline;
-        border-top: 1px #cccccc solid;
-        border-left: 1px #cccccc solid;
-        border-bottom: 1px #cccccc solid; }
-        body header nav ul li:first-child {
-          border-bottom-left-radius: 3px;
-          border-top-left-radius: 3px; }
-        body header nav ul li:last-child {
+        display: inline; }
+        body header nav ul li:last-child a {
           border-right: 1px #cccccc solid;
           border-bottom-right-radius: 3px;
           border-top-right-radius: 3px; }
-        body header nav ul li:hover {
-          background-color: #cccccc; }
+        body header nav ul li:first-child a {
+          border-bottom-left-radius: 3px;
+          border-top-left-radius: 3px; }
         body header nav ul li a {
+          padding: 4px;
+          border-top: 1px #cccccc solid;
+          border-left: 1px #cccccc solid;
+          border-bottom: 1px #cccccc solid;
           text-decoration: none; }
+          body header nav ul li a:hover {
+            background-color: #cccccc; }
+          body header nav ul li a.active {
+            background-color: #cccccc; }
   body .stats {
     color: #555555;
     font-size: 14px;

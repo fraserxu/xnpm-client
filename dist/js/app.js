@@ -49714,17 +49714,24 @@ stream.on('data', function (item) {
 })
 
 var App = React.createClass({displayName: 'App',
+  getInitialState: function() {
+    stream.on('data', this.mountData)
+    return { items: [] };
+  },
+  mountData: function(item) {
+    this.state.items.push(JSON.parse(item))
+    this.setState({ items: this.state.items })
+  },
   render: function() {
     return (
       React.DOM.div(null, 
         React.DOM.header(null, 
-          React.DOM.div({class: "header"}, 
+          React.DOM.div({className: "header"}, 
             React.DOM.h1(null, "NPM command history")
           ), 
 
           React.DOM.nav(null, 
             React.DOM.ul(null, 
-              React.DOM.li(null, Link({to: "app"}, "Dashboard")), 
               React.DOM.li(null, Link({to: "heatmap"}, "Heat Map")), 
               React.DOM.li(null, Link({to: "commandbox"}, "Command Table")), 
               React.DOM.li(null, Link({to: "barchartbox"}, "Bar Chart")), 
@@ -49740,7 +49747,7 @@ var App = React.createClass({displayName: 'App',
 });
 
 var routes = (
-  Routes({location: "history"}, 
+  Routes(null, 
     Route({name: "app", path: "/", handler: App}, 
       Route({name: "heatmap", path: "/heatmap", handler: HeatMap}), 
       Route({name: "chartist", path: "/chartist", data: items, handler: Chartist}), 

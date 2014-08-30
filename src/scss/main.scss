@@ -32,25 +32,28 @@ body {
         font-weight: 300;
         li {
           font-size: 14px;
-          padding: 4px;
           display: inline;
-          border-top: 1px #ccc solid;
-          border-left: 1px #ccc solid;
-          border-bottom: 1px #ccc solid;
-          &:first-child {
-            border-bottom-left-radius: 3px;
-            border-top-left-radius: 3px;
-          }
-          &:last-child {
+          &:last-child a {
             border-right: 1px #ccc solid;
             border-bottom-right-radius: 3px;
             border-top-right-radius: 3px;
           }
-          &:hover {
-            background-color: #ccc;
+          &:first-child a {
+            border-bottom-left-radius: 3px;
+            border-top-left-radius: 3px;
           }
           a {
+            padding: 4px;
+            border-top: 1px #ccc solid;
+            border-left: 1px #ccc solid;
+            border-bottom: 1px #ccc solid;
             text-decoration: none;
+            &:hover {
+              background-color: #ccc;
+            }
+            &.active {
+              background-color: #ccc;
+            }
           }
         }
       }
