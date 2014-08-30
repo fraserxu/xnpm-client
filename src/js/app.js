@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React = require('react');
+var React = window.React = require('react');
 var CommandBox = require('./table/box');
 var BarChartBox = require('./barchart/barchart-box');
 var HeatMap = require('./heatmap/heatmap');
@@ -45,7 +45,7 @@ var routes = (
   <Routes location='history'>
     <Route name="app" path="/" handler={App}>
       <Route name='heatmap' path='/heatmap' handler={HeatMap} />
-      <Route name='chartist' path='/chartist' handler={Chartist} />
+      <Route name='chartist' path='/chartist' data={items} handler={Chartist} />
       <Route name='commandbox' path='/command' data={items} handler={CommandBox} />
       <Route name='barchartbox' path='/barchart' data={items} handler={BarChartBox} />
     </Route>

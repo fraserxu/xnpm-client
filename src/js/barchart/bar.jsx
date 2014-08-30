@@ -14,8 +14,7 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <rect fill={this.props.color}
-        height={this.props.height} width={this.props.width}
+      <rect fill={this.props.color} height={this.props.height} width={this.props.width}
         x={0} y={this.props.offset} />
     );
   }

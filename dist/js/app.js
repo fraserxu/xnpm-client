@@ -49693,7 +49693,7 @@ module.exports = function(arr, fn, initial){
 /** @jsx React.DOM */
 'use strict';
 
-var React = require('react');
+var React = window.React = require('react');
 var CommandBox = require('./table/box');
 var BarChartBox = require('./barchart/barchart-box');
 var HeatMap = require('./heatmap/heatmap');
@@ -49737,7 +49737,7 @@ var routes = (
   Routes({location: "history"}, 
     Route({name: "app", path: "/", handler: App}, 
       Route({name: "heatmap", path: "/heatmap", handler: HeatMap}), 
-      Route({name: "chartist", path: "/chartist", handler: Chartist}), 
+      Route({name: "chartist", path: "/chartist", data: items, handler: Chartist}), 
       Route({name: "commandbox", path: "/command", data: items, handler: CommandBox}), 
       Route({name: "barchartbox", path: "/barchart", data: items, handler: BarChartBox})
     )
@@ -49745,6 +49745,7 @@ var routes = (
 );
 
 React.renderComponent(routes, document.body);
+
 },{"./barchart/barchart-box":211,"./chartist/chartist":215,"./heatmap/heatmap":216,"./table/box":217,"react":203,"react-router/Link":24,"react-router/Route":25,"react-router/Routes":26,"shoe":204}],210:[function(require,module,exports){
 /** @jsx React.DOM */
 'use strict';
@@ -49762,8 +49763,7 @@ module.exports = React.createClass({displayName: 'exports',
 
   render: function() {
     return (
-      React.DOM.rect({fill: this.props.color, 
-        height: this.props.height, width: this.props.width, 
+      React.DOM.rect({fill: this.props.color, height: this.props.height, width: this.props.width, 
         x: 0, y: this.props.offset})
     );
   }
@@ -49855,18 +49855,23 @@ module.exports = React.createClass({displayName: 'exports',
 'use strict';
 
 var React = require('react');
+var _ = require('lodash');
+window._ = _
 var Chartist = require('chartist');
 
 module.exports = React.createClass({displayName: 'exports',
   componentDidMount: function() {
+    var dates = this.props.data.map(function(data) {
+      return new Date(data.timestamp).getDate()
+    })
+
+    var labels = _.uniq(dates)
+    var times = _.values(_.countBy(dates, function(date) {return date}));
+
     // Our labels and three data series
     var data = {
-      labels: ['Week1', 'Week2', 'Week3', 'Week4', 'Week5', 'Week6'],
-      series: [
-        [5, 4, 3, 7, 5, 10],
-        [3, 2, 9, 5, 4, 6],
-        [2, 1, -3, -4, -2, 0]
-      ]
+      labels: labels,
+      series: [ times ]
     };
 
     // We are setting a few options for our chart and override the defaults
@@ -49878,9 +49883,9 @@ module.exports = React.createClass({displayName: 'exports',
       // X-Axis specific configuration
       axisX: {
         // We can disable the grid for this axis
-        showGrid: false,
+        showGrid: false
         // and also don't show the label
-        showLabel: false
+        // showLabel: false
       },
       // Y-Axis specific configuration
       axisY: {
@@ -49890,7 +49895,7 @@ module.exports = React.createClass({displayName: 'exports',
         // used for the labels on each axis. Here we are converting the
         // values into million pound.
         labelInterpolationFnc: function(value) {
-          return '£' + value + 'm';
+          return parseInt(value) + 'times';
         }
       }
     };
@@ -49906,7 +49911,7 @@ module.exports = React.createClass({displayName: 'exports',
   }
 });
 
-},{"chartist":2,"react":203}],216:[function(require,module,exports){
+},{"chartist":2,"lodash":23,"react":203}],216:[function(require,module,exports){
 /** @jsx React.DOM */
 'use strict';
 

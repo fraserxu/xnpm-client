@@ -2,18 +2,23 @@
 'use strict';
 
 var React = require('react');
+var _ = require('lodash');
+window._ = _
 var Chartist = require('chartist');
 
 module.exports = React.createClass({
   componentDidMount: function() {
+    var dates = this.props.data.map(function(data) {
+      return new Date(data.timestamp).getDate()
+    })
+
+    var labels = _.uniq(dates)
+    var times = _.values(_.countBy(dates, function(date) {return date}));
+
     // Our labels and three data series
     var data = {
-      labels: ['Week1', 'Week2', 'Week3', 'Week4', 'Week5', 'Week6'],
-      series: [
-        [5, 4, 3, 7, 5, 10],
-        [3, 2, 9, 5, 4, 6],
-        [2, 1, -3, -4, -2, 0]
-      ]
+      labels: labels,
+      series: [ times ]
     };
 
     // We are setting a few options for our chart and override the defaults
@@ -25,9 +30,9 @@ module.exports = React.createClass({
       // X-Axis specific configuration
       axisX: {
         // We can disable the grid for this axis
-        showGrid: false,
+        showGrid: false
         // and also don't show the label
-        showLabel: false
+        // showLabel: false
       },
       // Y-Axis specific configuration
       axisY: {
@@ -37,7 +42,7 @@ module.exports = React.createClass({
         // used for the labels on each axis. Here we are converting the
         // values into million pound.
         labelInterpolationFnc: function(value) {
-          return '£' + value + 'm';
+          return parseInt(value) + 'times';
         }
       }
     };
