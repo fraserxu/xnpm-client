@@ -1,7 +1,8 @@
 'use strict';
 
 var gulp = require('gulp');
-var browserify = require('gulp-browserify');
+var browserify = require('browserify');
+var transform = require('vinyl-transform');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var bourbon = require('node-bourbon').includePaths;
@@ -12,14 +13,16 @@ var css = [
   './node_modules/cal-heatmap/cal-heatmap.css'
 ]
 
-gulp.task('scripts', function() {
-  return gulp.src('./src/js/app.js', {read: false})
-    .pipe(browserify({
-      insertGlobals : false,
-      transform: ['reactify'],
-      extensions: ['.jsx']
-    }))
-    .pipe(gulp.dest('./dist/js'));
+gulp.task('scripts', function () {
+  var browserified = transform(function(filename) {
+    var b = browserify(filename);
+    b.transform('reactify');
+    return b.bundle();
+  });
+
+  return gulp.src('./src/app.js')
+    .pipe(browserified)
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('styles', function () {
