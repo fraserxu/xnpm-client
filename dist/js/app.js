@@ -3404,15 +3404,25 @@ function arrayEquals(arrayA, arrayB) {
 /**
  * AMD Loader
  */
-if (typeof define === "function" && define.amd) {
-	define(["d3"], function() {
-		"use strict";
+(function (root, factory) {
+  if (typeof exports === 'object') {
+    // CommonJS
+    module.exports = factory(require('d3'));
+  } else if (typeof define === 'function' && define.amd) {
+    // AMD
+    define(['d3'], function (d3) {
+      return (root.returnExportsGlobal = factory(d3));
+    });
+  } else {
+    // Global Variables
+    root.returnExportsGlobal = factory(root.d3);
+  }
+}(this, function (d3) {
+  // Your actual module
+  return CalHeatMap;
+}));
 
-		return CalHeatMap;
-	});
-}
-
-},{}],2:[function(require,module,exports){
+},{"d3":3}],2:[function(require,module,exports){
 (function(root, factory) {
     if(typeof exports === 'object') {
         module.exports = factory();

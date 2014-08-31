@@ -8,14 +8,15 @@ var bourbon = require('node-bourbon').includePaths;
 
 var css = [
   './src/scss/main.scss',
-  './node_modules/chartist/libdist/chartist.min.css'
+  './node_modules/chartist/libdist/chartist.min.css',
+  './node_modules/cal-heatmap/cal-heatmap.css'
 ]
 
 gulp.task('scripts', function() {
   return gulp.src('./src/js/app.js', {read: false})
     .pipe(browserify({
       insertGlobals : false,
-      transform: ['reactify', 'cssify'],
+      transform: ['reactify'],
       extensions: ['.jsx']
     }))
     .pipe(gulp.dest('./dist/js'));
