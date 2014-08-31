@@ -31,6 +31,7 @@ body {
           border-bottom-left-radius: 3px;
           border-top-left-radius: 3px; }
         body header nav ul li a {
+          color: #333333;
           padding: 4px;
           border-top: 1px #cccccc solid;
           border-left: 1px #cccccc solid;
@@ -47,6 +48,9 @@ body {
     padding-left: 15px; }
   body .pull-right {
     text-align: right; }
+
+#cal-heatmap {
+  padding: 8px; }
 
 table {
   width: 100%;

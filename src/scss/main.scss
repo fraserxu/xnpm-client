@@ -43,6 +43,7 @@ body {
             border-top-left-radius: 3px;
           }
           a {
+            color: #333;
             padding: 4px;
             border-top: 1px #ccc solid;
             border-left: 1px #ccc solid;
@@ -69,6 +70,10 @@ body {
   .pull-right {
     text-align: right;
   }
+}
+
+#cal-heatmap {
+  padding: 8px;
 }
 
 table {

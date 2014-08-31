@@ -7,7 +7,11 @@ var CalHeatMap = require('cal-heatmap');
 module.exports = React.createClass({
   componentDidMount: function() {
     var cal = new CalHeatMap();
-    cal.init({});
+    cal.init({
+      domain: 'month',
+      tooltip: true,
+      start: new Date(2014, 6, 11),
+    });
   },
   render: function() {
     return (
