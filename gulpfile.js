@@ -20,9 +20,9 @@ gulp.task('scripts', function () {
     return b.bundle();
   });
 
-  return gulp.src('./src/app.js')
+  return gulp.src('./src/js/app.js')
     .pipe(browserified)
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('styles', function () {

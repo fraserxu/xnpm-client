@@ -8,8 +8,10 @@ var Chartist = require('chartist');
 module.exports = React.createClass({
   componentDidMount: function() {
     var dates = this.props.data.map(function(data) {
-      return new Date(data.timestamp).getDate()
+      return parseInt(new Date(data.timestamp).getUTCMonth() + 1) + '.' + new Date(data.timestamp).getUTCDate()
     })
+
+    console.log('dates', dates)
 
     var labels = (_.uniq(this.props.data.map(function(data) {
       return parseInt(new Date(data.timestamp).getUTCMonth() + 1) + '.' + new Date(data.timestamp).getUTCDate()
